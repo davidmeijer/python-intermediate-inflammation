@@ -1,4 +1,4 @@
-ame: CI
+name: CI
 
 # We can specify which Github events will trigger a CI build
 on: push
