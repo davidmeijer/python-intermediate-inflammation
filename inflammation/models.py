@@ -6,6 +6,7 @@ Patients' data is held in an inflammation table (2D array) where each row contai
 inflammation data for a single patient taken over a number of days 
 and each column represents a single day across all patients.
 """
+from functools import reduce
 
 import numpy as np
 
@@ -81,11 +82,31 @@ def std_dev(data):
     return np.std(data, axis=0)
 
 def daily_above_threshold(patient_num, data, threshold):
-    """Determine whether or not each daily inflammation value exceeds a given threshold for a given patient.
+    """Count how many days a given patient's inflammation exceeds a given threshold.
 
     :param patient_num: The patient row number
     :param data: A 2D data array with inflammation data
     :param threshold: An inflammation threshold to check each daily value against
-    :returns: A boolean list representing whether or not each patient's daily inflammation exceeded the threshold
+    :returns: An integer representing the number of days a patient's inflammation is over a given threshold
     """
-    return list(map(lambda x: x > threshold, data[patient_num]))
+    def count_above_threshold(a, b):
+        if b:
+            return a + 1
+        else:
+            return a
+
+    # Use map to determine if each daily inflammation value exceeds a given threshold for a patient
+    above_threshold = map(lambda x: x > threshold, data[patient_num])
+    # Use reduce to count on how many days inflammation was above the threshold for a patient
+    return reduce(count_above_threshold, above_threshold, 0)
+
+def attach_names(data, names):
+    """Create datastructure containing patient records."""
+    assert len(data) == len(names), 'Data and names should have the same length'
+
+    output = []
+
+    for name, data_row in zip(names, data):
+        output.append({'name': name, 'data': data_row})
+
+    return output
