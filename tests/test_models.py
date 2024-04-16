@@ -98,3 +98,16 @@ def test_patient_normalise(test, expected, expect_raises):
             npt.assert_almost_equal(patient_normalise(np.array(test)), np.array(expected), decimal=2)
     else:
         npt.assert_almost_equal(patient_normalise(np.array(test)), np.array(expected), decimal=2)
+
+# @pytest.mark.parametrize(
+#     "test, expected",
+#     [
+#         ([ [0, 0], [0, 0], [0, 0] ], [0, 0]),
+#         ([ [1, 2], [3, 4], [5, 6] ], [1.63, 1.63]),
+#     ]
+# )
+# def test_std_dev(test, expected):
+#     """Test standard deviation function works for array of zeroes and positive integers."""
+#     from inflammation.models import std_dev
+
+#     npt.assert_almost_equal(std_dev(np.array(test)), np.array(expected), decimal=2)

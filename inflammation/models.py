@@ -70,3 +70,12 @@ def patient_normalise(data):
         normalised = data / max_inflamation[:, np.newaxis]
     normalised[np.isnan(normalised)] = 0
     return normalised
+
+def std_dev(data):
+    """Calculate the standard deviation of a 2D inflammation data array for each day.
+
+    :param data: A 2D data array with inflammation data (each row contains 
+        measurements for a single patient across all days).
+    :returns: An array of standard deviation values of measurements for each day.
+    """
+    return np.std(data, axis=0)
