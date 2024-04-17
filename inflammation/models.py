@@ -11,6 +11,7 @@ from functools import reduce
 import numpy as np
 
 class Observation:
+    """This is a docstring for Observation."""
     def __init__(self, day, value):
         self.day = day
         self.value = value
